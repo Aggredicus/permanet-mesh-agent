@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 
@@ -12,7 +12,7 @@ class IncomingMessage:
     node_id: str = "!mock"
     channel_index: int = 0
     is_direct: bool = False
-    received_at: datetime = datetime.now(UTC)
+    received_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass(frozen=True)
