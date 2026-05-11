@@ -4,6 +4,16 @@ PermaNet Mesh Agent is an off-grid AI chatbot gateway for Meshtastic networks. I
 
 The project is designed for field crews, permaculture designers, local resilience groups, client project teams, and other low-connectivity use cases where lightweight, radio-safe AI assistance would be useful.
 
+## Start here
+
+If you are reviewing this repository for the first time, read these in order:
+
+1. [`docs/developer-handoff.md`](docs/developer-handoff.md) — fastest technical orientation for a backend developer.
+2. [`AGENTS.md`](AGENTS.md) — safety rules for human and AI-assisted development.
+3. [`docs/architecture.md`](docs/architecture.md) — module boundaries and data flow.
+4. [`docs/channel-policy.md`](docs/channel-policy.md) — public, private, and admin channel behavior.
+5. [Issue #1](https://github.com/Aggredicus/permanet-mesh-agent/issues/1) — v0.2.0 planning checklist.
+
 ## Current milestone
 
 **v0.1.0 target:** build and test a mock-radio command bot before connecting to physical Meshtastic hardware.
@@ -75,14 +85,42 @@ cd permanet-mesh-agent
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
-python -m permanet_agent.main --mock --message "@permanet ping"
 pytest
+ruff check .
+python -m permanet_agent.main --mock --message "@permanet ping"
 ```
 
-## Status
+Expected output:
+
+```text
+pong
+```
+
+## Current status
 
 This repository is intentionally scaffolded around a mock-first workflow. The mock adapter lets development proceed before all physical Meshtastic devices are available.
 
+Implemented:
+
+- mock radio adapter
+- command parser
+- basic router
+- mock AI backend
+- `help`, `ping`, `ask`, and placeholder `more` commands
+- tests for summon-only public behavior
+- architecture, channel policy, hardware, roadmap, and handoff docs
+- GitHub Actions CI
+
+Next milestone:
+
+```text
+v0.2.0 — response policy, rate limits, and MORE pagination
+```
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). The most important rule is that public mesh messages must remain summon-only.
+
 ## License
 
-License TBD by project owner before public reuse, packaging, or commercial distribution.
+This project currently uses a temporary all-rights-reserved notice while the long-term license is being decided. See [`LICENSE.md`](LICENSE.md).
