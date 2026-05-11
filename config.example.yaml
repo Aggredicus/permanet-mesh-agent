@@ -1,0 +1,42 @@
+agent:
+  name: permanet
+  summons:
+    - "@permanet"
+    - "/permanet"
+  default_response_limit_chars: 180
+
+radio:
+  adapter: mock
+  # Future values: meshtastic_serial, meshtastic_tcp, meshtastic_ble
+  serial_port: null
+
+channels:
+  public:
+    index: 0
+    mode: summon_only
+    enabled: true
+
+  private_groups: []
+  # Example:
+  # - name: field_crew
+  #   index: 1
+  #   mode: group_assistant
+  #   allowed_nodes:
+  #     - "!example"
+
+admin:
+  allowed_nodes: []
+
+ai:
+  backend: mock
+  # Future values: openai, ollama
+  model: mock
+
+policy:
+  public_requires_summon: true
+  max_response_chars: 180
+  per_node_cooldown_seconds: 30
+  allow_automatic_multipacket_replies: false
+
+storage:
+  sqlite_path: data/permanet.sqlite3
