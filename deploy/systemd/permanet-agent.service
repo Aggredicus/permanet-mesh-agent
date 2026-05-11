@@ -1,0 +1,14 @@
+[Unit]
+Description=PermaNet Mesh Agent
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/permanet-mesh-agent
+EnvironmentFile=-/opt/permanet-mesh-agent/.env
+ExecStart=/opt/permanet-mesh-agent/.venv/bin/permanet-agent --mock --message "@permanet help"
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
