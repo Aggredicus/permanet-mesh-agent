@@ -1,0 +1,5 @@
+User over mesh:
+@permanet help
+
+PermaNet Mesh Agent:
+Commands: help, ping, ask <q>, more. Public mode replies only when summoned.
