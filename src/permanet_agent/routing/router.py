@@ -9,7 +9,11 @@ from permanet_agent.protocol.message import IncomingMessage, OutgoingMessage
 class MeshRouter:
     """Summon-only router for MVP public channel behavior."""
 
-    def __init__(self, parser: CommandParser | None = None, ai_backend: AIBackend | None = None) -> None:
+    def __init__(
+        self,
+        parser: CommandParser | None = None,
+        ai_backend: AIBackend | None = None,
+    ) -> None:
         from permanet_agent.ai.mock_backend import MockAIBackend
 
         self.parser = parser or CommandParser()

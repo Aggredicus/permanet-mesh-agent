@@ -11,7 +11,12 @@ class MockRadio:
 
     sent_messages: list[OutgoingMessage] = field(default_factory=list)
 
-    def receive_text(self, text: str, node_id: str = "!mock", channel_index: int = 0) -> IncomingMessage:
+    def receive_text(
+        self,
+        text: str,
+        node_id: str = "!mock",
+        channel_index: int = 0,
+    ) -> IncomingMessage:
         return IncomingMessage(text=text, node_id=node_id, channel_index=channel_index)
 
     def send(self, message: OutgoingMessage) -> None:
