@@ -19,6 +19,23 @@ Use this planning artifact when selecting or reordering work:
 
 - `docs/planning/priority-ledger.md`
 
+## Protected main workflow
+
+`main` is the stable reviewed branch. Meaningful changes should be made on issue-linked branches and merged through pull requests.
+
+The intended GitHub protection for `main` is:
+
+```text
+Pull requests required before merge
+CI / test required before merge
+Force pushes blocked
+Branch deletion blocked
+Conversation resolution required if available
+Administrator enforcement enabled if practical
+```
+
+If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. Once Issue #5 is completed, GitHub should enforce these rules directly.
+
 ## Issue forms
 
 Use the structured GitHub issue forms when opening new work:
@@ -45,6 +62,7 @@ Blank issues remain enabled for maintainers, but contributors and agents should 
 6. Update docs when behavior changes.
 7. Preserve public-channel summon-only behavior.
 8. Open a PR with validation evidence and a rollback plan.
+9. Merge only after required checks pass.
 
 ## Issue prioritization
 

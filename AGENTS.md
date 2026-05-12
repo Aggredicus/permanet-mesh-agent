@@ -39,6 +39,23 @@ Rules:
 - Stop before high-risk behavior changes.
 - PR summaries must include validation evidence and a rollback plan.
 - Use the priority ledger and prioritization SOP when selecting or reordering work.
+- Treat required GitHub checks as merge-blocking once branch protection is active.
+
+## Protected main expectations
+
+`main` is intended to be protected by GitHub branch protection or repository rulesets.
+
+Agents should assume these expectations apply even if GitHub settings are still being configured:
+
+```text
+Pull requests are required before merge.
+CI / test must pass before merge.
+Force pushes to main are not allowed.
+Deleting main is not allowed.
+Conversation resolution is required if available.
+```
+
+Agents must not bypass, weaken, or claim completion of branch protection settings unless the settings were explicitly verified in GitHub.
 
 ## Development priorities
 
@@ -88,6 +105,8 @@ Stop and ask for human review before:
 - Working directly on `main` for feature or governance work.
 - Claiming validation success without command output or explicit evidence.
 - Reordering high-priority safety work without updating the priority ledger rationale.
+- Merging while required GitHub checks are failing, pending, or missing.
+- Claiming branch protection is enabled without verified GitHub settings evidence.
 
 ## Coding style
 
