@@ -1,0 +1,62 @@
+name: Documentation update
+description: Improve README, SOPs, handoff docs, AGENTS, CONTRIBUTING, diagrams, or tutorials.
+title: "[Docs]: "
+labels: ["documentation", "triage"]
+body:
+  - type: textarea
+    id: affected-doc
+    attributes:
+      label: Affected document
+      placeholder: README.md, AGENTS.md, docs/sops/..., docs/...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is outdated, missing, or unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Intended audience
+      placeholder: Maintainer, backend developer, AI agent, field tester, client, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: Desired reader outcome
+      description: What should the reader understand or be able to do after this doc update?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      placeholder: Which docs should be changed?
+    validations:
+      required: true
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals
+      placeholder: What should this docs issue avoid?
+    validations:
+      required: false
+  - type: textarea
+    id: validation-plan
+    attributes:
+      label: Validation plan
+      placeholder: Review links, check examples, run tests if commands changed, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
