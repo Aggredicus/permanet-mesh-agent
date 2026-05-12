@@ -35,7 +35,9 @@ ai:
 policy:
   public_requires_summon: true
   max_response_chars: 180
+  more_prompt: "Reply MORE for next step."
   per_node_cooldown_seconds: 30
+  per_channel_cooldown_seconds: 5
   allow_automatic_multipacket_replies: false
 
 storage:
