@@ -1,0 +1,68 @@
+name: Experiment / research spike
+description: Explore an uncertain idea without committing to production behavior.
+title: "[Experiment]: "
+labels: ["triage"]
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: What do you think might be true?
+    validations:
+      required: true
+  - type: textarea
+    id: research-question
+    attributes:
+      label: Research question
+      description: What question should this spike answer?
+    validations:
+      required: true
+  - type: input
+    id: timebox
+    attributes:
+      label: Timebox
+      placeholder: 2 hours, 1 day, one small PR, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success criteria
+      description: How will we know the experiment was useful?
+    validations:
+      required: true
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals
+      description: What should not become production behavior in this spike?
+    validations:
+      required: true
+  - type: textarea
+    id: allowed-files
+    attributes:
+      label: Files allowed to change
+      placeholder: docs/experiments/..., examples/..., tests/..., etc.
+    validations:
+      required: true
+  - type: textarea
+    id: report-plan
+    attributes:
+      label: How results will be reported
+      placeholder: Experiment note, issue comment, ADR candidate, follow-up issue, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: promotion-criteria
+    attributes:
+      label: Promotion criteria
+      description: What evidence would justify turning this into feature work?
+    validations:
+      required: true
+  - type: textarea
+    id: rollback-plan
+    attributes:
+      label: Rollback / cleanup plan
+      description: How will experimental changes be removed or isolated?
+    validations:
+      required: true
