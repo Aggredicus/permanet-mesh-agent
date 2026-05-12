@@ -1,0 +1,85 @@
+name: Hardware safety / live radio work
+description: Plan Meshtastic hardware, live radio, field testing, or transmission work.
+title: "[Hardware]: "
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this strict template for any work that may affect live radio, Meshtastic hardware, field testing, or transmission behavior.
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware involved
+      placeholder: Meshtastic device, firmware, transport, antenna, power source, etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: live-transmission
+    attributes:
+      label: Does this affect live transmission?
+      options:
+        - No
+        - Maybe
+        - Yes
+    validations:
+      required: true
+  - type: textarea
+    id: mock-tests
+    attributes:
+      label: Mock tests already present
+      description: What mock-radio tests exist before hardware use?
+    validations:
+      required: true
+  - type: textarea
+    id: safe-default
+    attributes:
+      label: Safe default behavior
+      description: How does this remain disabled or safe by default?
+    validations:
+      required: true
+  - type: textarea
+    id: mesh-spam-risk
+    attributes:
+      label: Mesh spam or flood risk
+      description: How could this accidentally send too many packets?
+    validations:
+      required: true
+  - type: textarea
+    id: field-test
+    attributes:
+      label: Field-test steps
+      placeholder: Include setup, command, expected output, abort conditions, and observer notes.
+    validations:
+      required: true
+  - type: textarea
+    id: rollback-plan
+    attributes:
+      label: Rollback / disable plan
+      description: How can live behavior be immediately disabled?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety-checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: Public chatter without summon remains ignored.
+          required: true
+        - label: Live radio is disabled by default.
+          required: true
+        - label: No automatic multi-packet flooding is introduced.
+          required: true
+        - label: No PSKs, node IDs, API keys, or private data are committed.
+          required: true
+        - label: Mock-first before hardware is preserved.
+          required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true

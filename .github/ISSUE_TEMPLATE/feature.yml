@@ -1,0 +1,95 @@
+name: Feature request
+description: Propose a product, runtime, or developer-facing feature.
+title: "[Feature]: "
+labels: ["quality", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for scoped feature work. For live radio, hardware, or transmission-related work, use the hardware safety template instead.
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose
+      description: What should this feature accomplish?
+      placeholder: Describe the outcome this feature should create.
+    validations:
+      required: true
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      description: Who benefits and what do they need?
+      placeholder: As a ..., I want ..., so that ...
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What should be included?
+      placeholder: List the specific files, modules, commands, or behaviors in scope.
+    validations:
+      required: true
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals
+      description: What should this issue explicitly avoid?
+      placeholder: List anything that should not be implemented here.
+    validations:
+      required: true
+  - type: dropdown
+    id: risk-level
+    attributes:
+      label: Risk level
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+  - type: textarea
+    id: affected-modules
+    attributes:
+      label: Affected modules or files
+      placeholder: src/permanet_agent/..., docs/..., tests/...
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety-impact
+    attributes:
+      label: PermaNet safety impact
+      options:
+        - label: Affects public mesh behavior.
+        - label: Affects live radio behavior.
+        - label: Affects response length or multi-packet output.
+        - label: Affects private channels or node identity.
+        - label: Involves secrets, PSKs, API keys, or private client data.
+        - label: Preserves mock-first before hardware.
+  - type: textarea
+    id: validation-plan
+    attributes:
+      label: Validation plan
+      description: How will this be proven correct?
+      placeholder: pytest, ruff check ., mock command checks, manual review, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: rollback-plan
+    attributes:
+      label: Rollback plan
+      description: How can this change be safely reverted?
+      placeholder: Revert the PR, disable the config flag, remove the new adapter, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Use checkboxes where possible.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true

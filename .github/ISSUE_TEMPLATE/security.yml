@@ -1,0 +1,82 @@
+name: Security or secrets concern
+description: Report secret hygiene, private data, dependency, or mesh security concerns.
+title: "[Security]: "
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For sensitive vulnerabilities, use the repository security policy once SECURITY.md exists. Do not paste real secrets into public issues.
+  - type: dropdown
+    id: concern-type
+    attributes:
+      label: Type of security concern
+      options:
+        - Secret or credential exposure
+        - PSK or node identity risk
+        - Private channel or client data risk
+        - Dependency vulnerability
+        - Unsafe disclosure pattern
+        - Public mesh abuse risk
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: exposed-secret
+    attributes:
+      label: Is a real secret exposed?
+      options:
+        - No
+        - Unsure
+        - Yes, but not included in this public issue
+    validations:
+      required: true
+  - type: dropdown
+    id: private-data
+    attributes:
+      label: Is private mesh/channel/client data involved?
+      options:
+        - No
+        - Unsure
+        - Yes
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential impact
+      description: What could go wrong if this is not addressed?
+    validations:
+      required: true
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Suggested mitigation
+      placeholder: Rotate, revoke, redact, add tests, update docs, enable scanning, etc.
+    validations:
+      required: false
+  - type: dropdown
+    id: containment
+    attributes:
+      label: Is immediate containment needed?
+      options:
+        - No
+        - Unsure
+        - Yes
+    validations:
+      required: true
+  - type: textarea
+    id: validation-plan
+    attributes:
+      label: Validation plan
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true

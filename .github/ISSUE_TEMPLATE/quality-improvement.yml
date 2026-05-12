@@ -1,0 +1,75 @@
+name: Quality improvement
+description: Improve CI, tests, docs, repo hygiene, or AI-agent workflows.
+title: "[Quality]: "
+labels: ["quality", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Quality problem
+      description: What quality gap or process weakness should be improved?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: Explain the risk, cost, or future benefit.
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Affected workflow or files
+      placeholder: CI, tests, SOPs, AGENTS.md, scripts, GitHub settings, etc.
+    validations:
+      required: false
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      description: What should be changed?
+    validations:
+      required: true
+  - type: dropdown
+    id: risk-level
+    attributes:
+      label: Risk level
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety-impact
+    attributes:
+      label: PermaNet safety impact
+      options:
+        - label: Affects public mesh behavior.
+        - label: Affects live radio behavior.
+        - label: Affects response length or multi-packet output.
+        - label: Affects private channels or node identity.
+        - label: Involves secrets, PSKs, API keys, or private client data.
+        - label: Preserves mock-first before hardware.
+  - type: textarea
+    id: validation-plan
+    attributes:
+      label: Validation plan
+    validations:
+      required: true
+  - type: textarea
+    id: rollback-plan
+    attributes:
+      label: Rollback plan
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
