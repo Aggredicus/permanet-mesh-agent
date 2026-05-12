@@ -11,6 +11,16 @@ class ResponsePolicy:
     more_prompt: str = "Reply MORE for next step."
 
     def split(self, text: str) -> list[str]:
+        """Split text into mesh-safe chunks.
+
+        This method returns all chunks so the router can cache continuations, but
+        it never sends multiple packets by itself. Non-final chunks include the
+        MORE hint when it fits within the configured character budget.
+        """
+
+        if self.max_chars < 1:
+            raise ValueError("max_chars must be at least 1")
+
         normalized = " ".join(text.strip().split())
         if not normalized:
             return [""]
@@ -23,14 +33,13 @@ class ResponsePolicy:
         continuation_suffix = " " + self.more_prompt
 
         while remaining:
-            budget = self.max_chars
-            suffix = continuation_suffix if len(remaining) > self.max_chars else ""
-            if suffix:
-                budget = max(1, self.max_chars - len(suffix))
-
             if len(remaining) <= self.max_chars:
                 chunks.append(remaining)
                 break
+
+            budget = self.max_chars - len(continuation_suffix)
+            if budget < 1:
+                budget = self.max_chars
 
             split_at = remaining.rfind(" ", 0, budget + 1)
             if split_at <= 0:
@@ -39,8 +48,9 @@ class ResponsePolicy:
             chunk = remaining[:split_at].strip()
             remaining = remaining[split_at:].strip()
 
-            if remaining:
-                chunk = (chunk + suffix).strip()
+            if remaining and len(chunk) + len(continuation_suffix) <= self.max_chars:
+                chunk = f"{chunk}{continuation_suffix}"
+
             chunks.append(chunk[: self.max_chars])
 
         return chunks
