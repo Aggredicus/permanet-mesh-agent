@@ -12,6 +12,28 @@ Never implement behavior that automatically replies to all public Meshtastic mes
 
 The bot must only respond on public channels when explicitly invoked with an approved summon phrase such as `@permanet` or `/permanet`.
 
+## Branching and quality workflow
+
+All human and AI-assisted implementation work should follow:
+
+- `docs/sops/branching-and-release.md`
+- `docs/sops/ai-coding-quality-system.md`
+- `docs/sops/pull-request-quality-gate.md`
+
+Cursor-specific behavior is defined in:
+
+- `.cursor/rules/branching.mdc`
+- `.cursor/rules/quality-gates.mdc`
+
+Rules:
+
+- Do not implement feature work directly on `main`.
+- Create or use an issue-linked branch before editing code.
+- Preserve public summon-only behavior.
+- Do not claim tests passed unless they were actually run.
+- Stop before high-risk behavior changes.
+- PR summaries must include validation evidence and a rollback plan.
+
 ## Development priorities
 
 1. Mock-first correctness before hardware integration.
@@ -20,6 +42,7 @@ The bot must only respond on public channels when explicitly invoked with an app
 4. Private channel behavior explicitly configured.
 5. Admin commands protected by allowlisted node identities.
 6. Short, radio-safe responses by default.
+7. Issue-first, branch-first, evidence-backed changes.
 
 ## Repository map
 
@@ -31,7 +54,8 @@ src/permanet_agent/protocol/   normalized message models
 src/permanet_agent/ai/         AI backend interfaces and implementations
 tests/                         quality gates for command and routing behavior
 docs/                          project, architecture, hardware, and deployment notes
-examples/                      sample configs and transcripts
+docs/sops/                     engineering quality SOPs
+.cursor/rules/                 Cursor-specific development rules
 ```
 
 ## Required behavior tests
@@ -53,6 +77,8 @@ Stop and ask for human review before:
 - Adding live Meshtastic transmission behavior that has not been tested with a mock adapter.
 - Adding dependency-heavy services such as dashboards, brokers, vector databases, or cloud infrastructure.
 - Changing public-channel summon behavior.
+- Working directly on `main` for feature or governance work.
+- Claiming validation success without command output or explicit evidence.
 
 ## Coding style
 
@@ -61,6 +87,7 @@ Stop and ask for human review before:
 - Keep AI backend calls behind a protocol/interface.
 - Do not hardcode private channel names, PSKs, node IDs, API keys, or client information.
 - Use examples and `.env.example` for configuration templates.
+- Keep implementation scoped to the linked issue.
 
 ## MVP target
 
