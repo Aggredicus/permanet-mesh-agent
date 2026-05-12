@@ -8,7 +8,7 @@ PermaNet Mesh Agent is a mock-first Python service that will become a summon-onl
 
 ## Current repository state
 
-The repository currently contains a working v0.1 scaffold, not a live radio bot.
+The repository currently contains a working mock-first scaffold plus v0.2 response-safety work in progress, not a live radio bot.
 
 Implemented:
 
@@ -18,7 +18,10 @@ Implemented:
 - Basic handlers for `help`, `ping`, `ask`, and `more`.
 - Mock AI backend.
 - Router that ignores unsummoned public chatter.
-- Unit tests for parser, router, and mock end-to-end flow.
+- Response policy for mesh-safe chunking.
+- In-memory `MORE` pagination cache keyed by node and channel.
+- Basic per-node and per-channel cooldown guard.
+- Unit tests for parser, router, policy, pagination, cooldown, and mock end-to-end flow.
 - Example config and environment files.
 - Architecture, hardware, roadmap, and channel policy docs.
 - GitHub Actions CI workflow.
@@ -26,8 +29,6 @@ Implemented:
 Not yet implemented:
 
 - Live Meshtastic serial, TCP, or BLE adapter.
-- Response chunking and `MORE` pagination state.
-- Rate limiting.
 - Private group routing.
 - Admin command permission layer.
 - SQLite persistence.
@@ -72,8 +73,22 @@ pong
 | `@permanet` | help response |
 | `@permanet help` | command list |
 | `@permanet ping` | `pong` |
-| `@permanet ask wet slope plants` | mock AI response |
-| `@permanet more` | placeholder response until pagination is implemented |
+| `@permanet ask wet slope plants` | mock AI response, chunked if long |
+| `@permanet more` | next pending chunk, or a short no-pending message |
+
+## MORE pagination behavior
+
+Long answers are split into mesh-safe chunks. The router sends only the first chunk immediately and stores remaining chunks in memory.
+
+The bot does not automatically send multiple packets.
+
+A user must explicitly request the next continuation with:
+
+```text
+@permanet more
+```
+
+Continuation state is keyed by node ID and channel index.
 
 ## Recommended reading order
 
@@ -84,30 +99,28 @@ pong
 5. `docs/roadmap.md` — milestone sequence.
 6. GitHub Issue #1 — v0.2.0 planning issue.
 
-## Immediate next milestone
+## Current milestone
 
-The next milestone is **v0.2.0: response policy, rate limits, and MORE pagination**.
+The current milestone is **v0.2.0: response policy, rate limits, and MORE pagination**.
 
-Build this before live Meshtastic hardware integration.
+Build and verify this before live Meshtastic hardware integration.
 
 Primary objectives:
 
 - Add configurable response length limits.
 - Add response chunking/truncation.
 - Add explicit `MORE` pagination state.
-- Add basic per-node cooldown.
+- Add basic per-node and per-channel cooldowns.
 - Add tests proving long answers do not auto-flood the mesh.
 - Preserve the summon-only public-channel invariant.
 
-## Suggested v0.2 module boundaries
+## v0.2 module boundaries
 
 ```text
 src/permanet_agent/policy/response_policy.py
 src/permanet_agent/policy/rate_limits.py
 src/permanet_agent/memory/pagination_cache.py
 ```
-
-The exact filenames can change if the boundaries remain clean.
 
 ## What not to build yet
 
@@ -123,21 +136,6 @@ Do not start with:
 
 Those are valid future directions, but the next step is radio-safe message behavior.
 
-## Recommended first developer task
-
-Start with response policy tests.
-
-Suggested tests:
-
-```text
-test_response_policy_limits_public_response_length
-test_long_answer_is_chunked_not_flooded
-test_more_returns_next_chunk
-test_more_without_pending_chunk_returns_helpful_message
-test_per_node_cooldown_blocks_repeated_invocation
-test_unsummoned_message_still_ignored
-```
-
 ## Definition of done for v0.2
 
 v0.2 is complete when:
@@ -148,8 +146,8 @@ v0.2 is complete when:
 4. Unsummoned public messages still return no response.
 5. Long responses are shortened or chunked.
 6. The bot does not automatically send multiple packets.
-7. `@permanet more` returns the next chunk only when pending continuation exists.
-8. Repeated messages from the same node can be rate-limited.
+7. `@permanet more` returns the next chunk only when a pending continuation exists.
+8. Repeated messages from the same node or channel can be rate-limited.
 
 ## After v0.2
 
@@ -161,4 +159,4 @@ That milestone should connect a physical Meshtastic node and prove:
 @permanet ping -> pong
 ```
 
- over live mesh hardware.
+over live mesh hardware.

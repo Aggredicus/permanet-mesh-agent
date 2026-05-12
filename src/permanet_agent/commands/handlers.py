@@ -19,6 +19,6 @@ def handle_command(command: ParsedCommand, ai_backend: AIBackend) -> str:
                 return "Ask usage: @permanet ask <short question>"
             return ai_backend.answer(command.args)
         case "more":
-            return "MORE pagination is planned for v0.2. Ask a focused short question for now."
+            return "No pending response. Ask a question first."
         case _:
             return "Unknown command. Try: @permanet help"
