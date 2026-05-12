@@ -26,3 +26,13 @@ jobs:
 
       - name: Run lint
         run: ruff check .
+
+      - name: Run mock ping smoke check
+        run: |
+          output=$(python -m permanet_agent.main --mock --message "@permanet ping")
+          test "$output" = "pong"
+
+      - name: Run unsummoned public chatter smoke check
+        run: |
+          output=$(python -m permanet_agent.main --mock --message "hello mesh")
+          test -z "$output"
