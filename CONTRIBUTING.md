@@ -13,16 +13,37 @@ Read these SOPs before meaningful implementation work:
 - `docs/sops/branching-and-release.md`
 - `docs/sops/ai-coding-quality-system.md`
 - `docs/sops/pull-request-quality-gate.md`
+- `docs/sops/issue-prioritization.md`
+
+Use this planning artifact when selecting or reordering work:
+
+- `docs/planning/priority-ledger.md`
 
 ## Development workflow
 
 1. Start from a GitHub issue.
-2. Create an issue-linked branch.
-3. Keep changes small and reviewable.
-4. Run branch policy, tests, and lint checks before opening a pull request.
-5. Update docs when behavior changes.
-6. Preserve public-channel summon-only behavior.
-7. Open a PR with validation evidence and a rollback plan.
+2. Check whether the issue is prioritized in `docs/planning/priority-ledger.md`.
+3. Create an issue-linked branch.
+4. Keep changes small and reviewable.
+5. Run branch policy, tests, and lint checks before opening a pull request.
+6. Update docs when behavior changes.
+7. Preserve public-channel summon-only behavior.
+8. Open a PR with validation evidence and a rollback plan.
+
+## Issue prioritization
+
+Issues may be scored by priority, complexity, safety impact, quality leverage, dependency unblock, urgency, and confidence.
+
+Decision categories:
+
+```text
+Do Now
+Strategic Build
+Batch / Delegate
+Defer / Wishlist
+```
+
+Agent votes are advisory. Human maintainers make final priority decisions.
 
 ## Branch naming
 
@@ -105,10 +126,13 @@ Before adding a Meshtastic serial, TCP, BLE, or meshtasticd adapter, prove the s
 - [ ] No secrets or private client information were committed.
 - [ ] No live radio flood behavior was introduced.
 - [ ] Rollback plan is documented.
+- [ ] Priority ledger is updated if the PR changes issue ordering or triage rules.
 
 ## Current priority
 
-The next feature milestone is v0.2.0:
+Use `docs/planning/priority-ledger.md` for the current ranked issue order.
+
+The next feature milestone remains v0.2.0:
 
 - response length guard
 - response chunking
@@ -116,4 +140,4 @@ The next feature milestone is v0.2.0:
 - per-node cooldown
 - tests for no automatic flooding
 
-Before continuing v0.2 feature implementation, complete the branching and AI coding quality workflow in GitHub Issue #2.
+Issue #1 tracks the detailed v0.2 planning checklist.
