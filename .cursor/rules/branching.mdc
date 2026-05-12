@@ -1,0 +1,43 @@
+# Branching Rule
+
+Before editing code:
+
+1. Inspect the current branch.
+2. If on `main`, create or switch to an issue-linked branch.
+3. Confirm or infer the linked issue number.
+4. Summarize intended file changes.
+5. Implement the smallest useful slice.
+6. Run verification.
+7. Prepare a PR-ready summary.
+
+Do not implement feature work directly on `main` unless the user explicitly authorizes an emergency exception.
+
+## Recommended branch for Issue #2
+
+```text
+quality/2-branching-ai-quality-workflow
+```
+
+## Allowed branch examples
+
+```text
+feature/1-response-policy-rate-limits
+quality/2-branching-ai-workflow
+fix/3-ci-ruff-cleanup
+docs/4-handoff-polish
+experiment/mqtt-bridge
+release/v1.0.0
+hotfix/v1.0.1-public-loop
+```
+
+## Cursor stop rules
+
+Stop before editing if:
+
+- there is no linked issue for meaningful work
+- the current branch is `main`
+- the requested change affects live radio behavior
+- the requested change affects public mesh auto-reply behavior
+- the requested change could expose secrets, PSKs, node IDs, or client data
+
+When stopping, explain the risk and propose the smallest safe next step.
