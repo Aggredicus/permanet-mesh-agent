@@ -19,6 +19,22 @@ Use this planning artifact when selecting or reordering work:
 
 - `docs/planning/priority-ledger.md`
 
+## Issue forms
+
+Use the structured GitHub issue forms when opening new work:
+
+| Template | Use when |
+|---|---|
+| Feature request | Proposing normal product, runtime, or developer-facing feature work. |
+| Bug report | Reporting broken behavior, regressions, or unexpected output. |
+| Quality improvement | Improving CI, tests, linting, branch policy, AI review, scoring, or repo hygiene. |
+| Hardware safety / live radio work | Planning Meshtastic hardware, live radio adapters, field tests, or transmission behavior. |
+| Security or secrets concern | Reporting secret hygiene, API keys, PSKs, node IDs, private channel risk, or dependency security concerns. |
+| Documentation update | Improving README, SOPs, handoff docs, AGENTS, CONTRIBUTING, diagrams, or tutorials. |
+| Experiment / research spike | Exploring uncertain ideas without silently turning them into production behavior. |
+
+Blank issues remain enabled for maintainers, but contributors and agents should prefer the structured forms because they capture scope, non-goals, validation, rollback, and acceptance criteria.
+
 ## Development workflow
 
 1. Start from a GitHub issue.
