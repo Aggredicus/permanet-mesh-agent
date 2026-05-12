@@ -117,10 +117,18 @@ def test_pagination_state_is_per_node_and_channel():
         ),
     )
 
-    first = router.route(IncomingMessage(text="@permanet ask long plan", node_id="!abc", channel_index=0))
-    wrong_node = router.route(IncomingMessage(text="@permanet more", node_id="!other", channel_index=0))
-    wrong_channel = router.route(IncomingMessage(text="@permanet more", node_id="!abc", channel_index=1))
-    right_key = router.route(IncomingMessage(text="@permanet more", node_id="!abc", channel_index=0))
+    first = router.route(
+        IncomingMessage(text="@permanet ask long plan", node_id="!abc", channel_index=0)
+    )
+    wrong_node = router.route(
+        IncomingMessage(text="@permanet more", node_id="!other", channel_index=0)
+    )
+    wrong_channel = router.route(
+        IncomingMessage(text="@permanet more", node_id="!abc", channel_index=1)
+    )
+    right_key = router.route(
+        IncomingMessage(text="@permanet more", node_id="!abc", channel_index=0)
+    )
 
     assert first is not None
     assert wrong_node is not None
