@@ -8,7 +8,7 @@ PermaNet Mesh Agent is a mock-first Python service that will become a summon-onl
 
 ## Current repository state
 
-The repository currently contains a working v0.1 scaffold, not a live radio bot.
+The repository now has a completed v0.1 scaffold and is still mock-first, not a live radio bot.
 
 Implemented:
 
@@ -32,6 +32,11 @@ Not yet implemented:
 - Admin command permission layer.
 - SQLite persistence.
 - Cloud or local LLM integration.
+
+Planning note:
+
+- Issue #2 is complete (initial scaffold/handoff phase).
+- Current priority queue is Issue #5 first, then Issue #1.
 
 ## Why the repo is mock-first
 

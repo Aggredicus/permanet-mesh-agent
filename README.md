@@ -14,11 +14,16 @@ If you are reviewing this repository for the first time, read these in order:
 4. [`docs/channel-policy.md`](docs/channel-policy.md) — public, private, and admin channel behavior.
 5. [Issue #1](https://github.com/Aggredicus/permanet-mesh-agent/issues/1) — v0.2.0 planning checklist.
 
-## Current milestone
+## Current phase
 
-**v0.1.0 target:** build and test a mock-radio command bot before connecting to physical Meshtastic hardware.
+The initial v0.1 scaffold is complete and remains mock-first.
 
-The first hardware milestone is simple:
+Current priority flow:
+
+1. [Issue #5](https://github.com/Aggredicus/permanet-mesh-agent/issues/5) - enforce branch protection and required checks on `main`.
+2. [Issue #1](https://github.com/Aggredicus/permanet-mesh-agent/issues/1) - deliver v0.2 response policy, rate limits, and `MORE` pagination.
+
+The first live-hardware milestone remains:
 
 ```text
 @permanet ping
@@ -108,7 +113,7 @@ pong
 
 ## Current status
 
-This repository is intentionally scaffolded around a mock-first workflow. The mock adapter lets development proceed before all physical Meshtastic devices are available.
+The v0.1 scaffold is complete and intentionally mock-first. The mock adapter lets development proceed before all physical Meshtastic devices are available.
 
 Implemented:
 

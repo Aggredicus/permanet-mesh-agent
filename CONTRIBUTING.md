@@ -166,7 +166,13 @@ Before adding a Meshtastic serial, TCP, BLE, or meshtasticd adapter, prove the s
 
 Use `docs/planning/priority-ledger.md` for the current ranked issue order.
 
-The next feature milestone remains v0.2.0:
+Current near-term order:
+
+- Issue #5: enforce branch protection and required checks on `main`
+- Issue #17: stale milestone docs cleanup
+- Issue #1: v0.2 response policy, rate limits, and `MORE` pagination
+
+The next runtime feature milestone remains v0.2.0:
 
 - response length guard
 - response chunking
