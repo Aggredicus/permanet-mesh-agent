@@ -19,11 +19,16 @@ All human and AI-assisted implementation work should follow:
 - `docs/sops/branching-and-release.md`
 - `docs/sops/ai-coding-quality-system.md`
 - `docs/sops/pull-request-quality-gate.md`
+- `docs/sops/issue-prioritization.md`
 
 Cursor-specific behavior is defined in:
 
 - `.cursor/rules/branching.mdc`
 - `.cursor/rules/quality-gates.mdc`
+
+Planning and prioritization are tracked in:
+
+- `docs/planning/priority-ledger.md`
 
 Rules:
 
@@ -33,6 +38,7 @@ Rules:
 - Do not claim tests passed unless they were actually run.
 - Stop before high-risk behavior changes.
 - PR summaries must include validation evidence and a rollback plan.
+- Use the priority ledger and prioritization SOP when selecting or reordering work.
 
 ## Development priorities
 
@@ -43,6 +49,7 @@ Rules:
 5. Admin commands protected by allowlisted node identities.
 6. Short, radio-safe responses by default.
 7. Issue-first, branch-first, evidence-backed changes.
+8. Priority/complexity scoring before large backlog reordering.
 
 ## Repository map
 
@@ -55,6 +62,7 @@ src/permanet_agent/ai/         AI backend interfaces and implementations
 tests/                         quality gates for command and routing behavior
 docs/                          project, architecture, hardware, and deployment notes
 docs/sops/                     engineering quality SOPs
+docs/planning/                 roadmap and priority planning artifacts
 .cursor/rules/                 Cursor-specific development rules
 ```
 
@@ -79,6 +87,7 @@ Stop and ask for human review before:
 - Changing public-channel summon behavior.
 - Working directly on `main` for feature or governance work.
 - Claiming validation success without command output or explicit evidence.
+- Reordering high-priority safety work without updating the priority ledger rationale.
 
 ## Coding style
 
