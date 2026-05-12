@@ -1,0 +1,50 @@
+# Quality Gates Rule
+
+Before marking work complete, run or clearly report the status of each required validation step.
+
+## Required checks
+
+- Run `pytest`.
+- Run `ruff check .`.
+- Verify `@permanet ping` returns `pong`.
+- Verify unsummoned public chatter returns no output.
+- Run `python scripts/check_branch_policy.py` from a valid issue branch.
+
+## PermaNet safety invariant
+
+```text
+Public mesh chatter without @permanet or another configured summon phrase is ignored.
+```
+
+## Prohibited changes without explicit human review
+
+Do not:
+
+- introduce automatic multi-packet flooding
+- enable live radio behavior by default
+- auto-reply to all public mesh messages
+- commit secrets, PSKs, node IDs, API keys, or private client data
+- remove tests that protect public summon-only behavior
+- expand scope beyond the linked issue without reporting it
+
+## Documentation rule
+
+Update docs, SOPs, config examples, or agent rules when behavior or workflow changes.
+
+## Evidence rule
+
+Do not claim tests passed unless they were actually run. If a command could not be run, report exactly why.
+
+Use this language:
+
+```text
+Ran pytest: passed.
+Could not run hardware test: no Meshtastic node connected.
+```
+
+Do not use this language:
+
+```text
+Everything should work.
+Tests are probably fine.
+```

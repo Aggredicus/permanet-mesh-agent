@@ -71,11 +71,21 @@ outgoing mesh message
 ```text
 src/permanet_agent/      Python service package
 docs/                    Human and developer documentation
+docs/sops/               Engineering quality SOPs
+.cursor/rules/           Cursor-specific development rules
 examples/                Configs, transcripts, and packet examples
 tests/                   Unit and integration-style tests
 deploy/                  systemd / future deployment assets
 scripts/                 Developer helper scripts
 ```
+
+## Engineering workflow
+
+This repo uses an issue-first, branch-first, PR-reviewed workflow. See:
+
+- [`docs/sops/branching-and-release.md`](docs/sops/branching-and-release.md)
+- [`docs/sops/ai-coding-quality-system.md`](docs/sops/ai-coding-quality-system.md)
+- [`docs/sops/pull-request-quality-gate.md`](docs/sops/pull-request-quality-gate.md)
 
 ## Development quick start
 

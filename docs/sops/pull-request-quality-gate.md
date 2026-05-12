@@ -1,0 +1,96 @@
+# Pull Request Quality Gate
+
+## Purpose
+
+Every pull request should make a proposed change reviewable, testable, reversible, and linked to an issue.
+
+The PR quality gate protects the project from undocumented assumptions, unsafe behavior changes, accidental public mesh spam, and unverified AI-generated code.
+
+## Required PR fields
+
+Each PR should include:
+
+- linked issue
+- summary
+- scope
+- non-goals
+- risk level
+- safety checklist
+- validation evidence
+- documentation updates
+- known limitations
+- rollback plan
+
+## Risk levels
+
+### Low
+
+Documentation, comments, formatting, or small tests with no runtime behavior change.
+
+### Medium
+
+Internal behavior, config, tests, CLI changes, or non-hardware code paths.
+
+### High
+
+Anything involving radio behavior, public mesh behavior, secrets, storage, AI backends, private channels, live transmission, or safety-critical defaults.
+
+High-risk PRs require explicit human-review notes before merge.
+
+## Required validation
+
+At minimum, run:
+
+```bash
+pytest
+ruff check .
+python -m permanet_agent.main --mock --message "@permanet ping"
+python -m permanet_agent.main --mock --message "hello mesh"
+```
+
+Expected behavior:
+
+```text
+@permanet ping -> pong
+hello mesh -> no output
+```
+
+If a command cannot be run, state why and do not imply it passed.
+
+## Safety checklist
+
+Every PR should verify:
+
+- public chatter without summon remains ignored
+- no automatic multi-packet flooding was introduced
+- live radio behavior is not enabled by default
+- no secrets, PSKs, node IDs, API keys, or private client data were committed
+- config defaults remain safe
+- high-risk behavior has human-review notes if applicable
+
+## Documentation updates
+
+Update README, docs, SOPs, config examples, or agent rules when behavior or workflow changes.
+
+## Rollback plan
+
+Every PR should include a simple rollback statement. Examples:
+
+```text
+Revert this PR to remove the workflow documentation changes.
+```
+
+```text
+Revert this PR to restore the previous routing behavior.
+```
+
+## Merge guidance
+
+Do not merge if:
+
+- tests are failing
+- validation evidence is missing
+- the PR changes public mesh behavior without explicit review
+- the PR enables live radio behavior by default
+- secrets or private identifiers are present
+- scope expanded beyond the linked issue without explanation
