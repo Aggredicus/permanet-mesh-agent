@@ -21,7 +21,7 @@ class PaginationCache:
         """Store continuation chunks for a node/channel pair."""
 
         key = (node_id, channel_index)
-        clean_chunks = [chunk for chunk in chunks if chunk]
+        clean_chunks = [chunk.strip() for chunk in chunks if chunk.strip()]
         if clean_chunks:
             self._pending[key] = clean_chunks
             return
