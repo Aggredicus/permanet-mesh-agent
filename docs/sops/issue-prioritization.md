@@ -18,6 +18,25 @@ docs/planning/priority-ledger.md
 
 GitHub Projects and labels may mirror the ledger, but the ledger explains why the priority order exists.
 
+## Structured issue forms
+
+New issues should use the structured GitHub issue forms when practical.
+
+Issue forms improve triage by collecting:
+
+- purpose or current behavior
+- scope
+- non-goals
+- risk level
+- PermaNet safety impact
+- validation plan
+- rollback plan
+- acceptance criteria
+
+Use the form data as the first source for priority, complexity, safety impact, quality leverage, and confidence scores.
+
+Blank issues remain enabled for maintainers, but structured forms are preferred for work that will become a branch or PR.
+
 ## When to score issues
 
 Score or re-score issues when:
