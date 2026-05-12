@@ -16,7 +16,7 @@ If you are reviewing this repository for the first time, read these in order:
 
 ## Current milestone
 
-**v0.1.0 target:** build and test a mock-radio command bot before connecting to physical Meshtastic hardware.
+**v0.1.0 (completed):** built and tested a mock-radio command bot; ready for v0.2 Meshtastic integration.
 
 The first hardware milestone is simple:
 
