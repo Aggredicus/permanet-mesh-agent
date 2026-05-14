@@ -10,6 +10,7 @@ body:
       description: What quality gap or process weakness should be improved?
     validations:
       required: true
+
   - type: textarea
     id: why
     attributes:
@@ -17,6 +18,7 @@ body:
       description: Explain the risk, cost, or future benefit.
     validations:
       required: true
+
   - type: textarea
     id: workflow
     attributes:
@@ -24,6 +26,7 @@ body:
       placeholder: CI, tests, SOPs, AGENTS.md, scripts, GitHub settings, etc.
     validations:
       required: false
+
   - type: textarea
     id: proposal
     attributes:
@@ -31,6 +34,7 @@ body:
       description: What should be changed?
     validations:
       required: true
+
   - type: dropdown
     id: risk-level
     attributes:
@@ -41,6 +45,7 @@ body:
         - High
     validations:
       required: true
+
   - type: checkboxes
     id: safety-impact
     attributes:
@@ -52,18 +57,37 @@ body:
         - label: Affects private channels or node identity.
         - label: Involves secrets, PSKs, API keys, or private client data.
         - label: Preserves mock-first before hardware.
+
+  - type: textarea
+    id: concurrency
+    attributes:
+      label: Multi-agent coordination notes
+      description: Describe expected ownership and concurrency boundaries.
+      placeholder: |
+        Existing PRs checked:
+        Existing branches checked:
+        Expected branch name:
+        Allowed files:
+        Forbidden files:
+        Shared docs affected:
+        Coordinator/reviewer notes:
+    validations:
+      required: false
+
   - type: textarea
     id: validation-plan
     attributes:
       label: Validation plan
     validations:
       required: true
+
   - type: textarea
     id: rollback-plan
     attributes:
       label: Rollback plan
     validations:
       required: true
+
   - type: textarea
     id: acceptance-criteria
     attributes:
