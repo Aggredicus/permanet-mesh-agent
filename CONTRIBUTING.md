@@ -19,6 +19,8 @@ Use this planning artifact when selecting or reordering work:
 
 - `docs/planning/priority-ledger.md`
 
+Check current GitHub issue state before starting work, because the priority ledger can lag behind recently merged PRs.
+
 ## Protected main workflow
 
 `main` is the stable reviewed branch. Meaningful changes should be made on issue-linked branches and merged through pull requests.
@@ -27,14 +29,14 @@ The intended GitHub protection for `main` is:
 
 ```text
 Pull requests required before merge
-CI / test required before merge
+test required before merge
 Force pushes blocked
 Branch deletion blocked
 Conversation resolution required if available
 Administrator enforcement enabled if practical
 ```
 
-If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. Once Issue #5 is completed, GitHub should enforce these rules directly.
+If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. GitHub should enforce these rules directly once Issue #5 is resolved.
 
 ## Issue forms
 
@@ -55,7 +57,7 @@ Blank issues remain enabled for maintainers, but contributors and agents should 
 ## Development workflow
 
 1. Start from a GitHub issue.
-2. Check whether the issue is prioritized in `docs/planning/priority-ledger.md`.
+2. Check whether the issue is prioritized in `docs/planning/priority-ledger.md` and verify its current GitHub state.
 3. Create an issue-linked branch.
 4. Keep changes small and reviewable.
 5. Run branch policy, tests, and lint checks before opening a pull request.
@@ -164,14 +166,13 @@ Before adding a Meshtastic serial, TCP, BLE, or meshtasticd adapter, prove the s
 
 ## Current priority
 
-Use `docs/planning/priority-ledger.md` for the current ranked issue order.
+Use `docs/planning/priority-ledger.md` for ranked planning context, but verify issue state in GitHub before starting work.
 
-The next feature milestone remains v0.2.0:
+The next implementation milestone is v0.3.0:
 
-- response length guard
-- response chunking
-- `MORE` pagination
-- per-node cooldown
-- tests for no automatic flooding
+- Meshtastic serial adapter behind a radio interface
+- packet normalization
+- hardware smoke tests
+- real mesh `@permanet ping -> pong`
 
-Issue #1 tracks the detailed v0.2 planning checklist.
+The project remains mock-first and not live-radio-ready until v0.3 hardware behavior is implemented and verified.

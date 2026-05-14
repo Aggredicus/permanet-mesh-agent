@@ -8,7 +8,7 @@ PermaNet Mesh Agent is a mock-first Python service that will become a summon-onl
 
 ## Current repository state
 
-The repository currently contains a working mock-first scaffold plus v0.2 response-safety work in progress, not a live radio bot.
+The repository currently contains a working mock-first command bot with v0.2 response-safety behavior implemented. It is still not a live radio bot.
 
 Implemented:
 
@@ -22,6 +22,7 @@ Implemented:
 - In-memory `MORE` pagination cache keyed by node and channel.
 - Basic per-node and per-channel cooldown guard.
 - Unit tests for parser, router, policy, pagination, cooldown, and mock end-to-end flow.
+- CLI smoke checks for `@permanet ping` and unsummoned public chatter.
 - Example config and environment files.
 - Architecture, hardware, roadmap, and channel policy docs.
 - GitHub Actions CI workflow.
@@ -57,12 +58,14 @@ pip install -e .[dev]
 pytest
 ruff check .
 python -m permanet_agent.main --mock --message "@permanet ping"
+python -m permanet_agent.main --mock --message "hello mesh"
 ```
 
-Expected output:
+Expected smoke behavior:
 
 ```text
-pong
+@permanet ping -> pong
+hello mesh -> no output
 ```
 
 ## Current command behavior
@@ -96,25 +99,24 @@ Continuation state is keyed by node ID and channel index.
 2. `AGENTS.md` — safety rules and development boundaries.
 3. `docs/architecture.md` — module boundaries and data flow.
 4. `docs/channel-policy.md` — public/private/admin channel behavior.
-5. `docs/roadmap.md` — milestone sequence.
-6. GitHub Issue #1 — v0.2.0 planning issue.
+5. `docs/roadmap.md` — completed milestones and next implementation target.
+6. GitHub Issue #38 — current handoff/status documentation consolidation issue, if still open.
 
 ## Current milestone
 
-The current milestone is **v0.2.0: response policy, rate limits, and MORE pagination**.
+The current implementation milestone is **v0.3.0: Meshtastic serial ping bot**.
 
-Build and verify this before live Meshtastic hardware integration.
+Build and verify v0.3 only after preserving the current mock behavior and safety tests.
 
-Primary objectives:
+Primary v0.3 objectives:
 
-- Add configurable response length limits.
-- Add response chunking/truncation.
-- Add explicit `MORE` pagination state.
-- Add basic per-node and per-channel cooldowns.
-- Add tests proving long answers do not auto-flood the mesh.
-- Preserve the summon-only public-channel invariant.
+- Add a live Meshtastic serial adapter behind a radio interface.
+- Normalize incoming and outgoing packet data without changing router behavior.
+- Prove `@permanet ping -> pong` on real hardware.
+- Preserve `hello mesh -> no output` on public channels.
+- Keep live radio behavior disabled unless explicitly configured.
 
-## v0.2 module boundaries
+## v0.2 module boundaries now in place
 
 ```text
 src/permanet_agent/policy/response_policy.py
@@ -128,35 +130,25 @@ Do not start with:
 
 - A web dashboard.
 - A database-heavy architecture.
-- Live radio transmission.
 - Private group routing.
 - A vector database.
 - Automatic multi-packet responses.
 - A complex agent framework.
 
-Those are valid future directions, but the next step is radio-safe message behavior.
+Those are valid future directions, but the next step is a small hardware-safe serial ping milestone.
 
-## Definition of done for v0.2
+## Definition of done for v0.3
 
-v0.2 is complete when:
+v0.3 is complete when:
 
 1. `pytest` passes.
 2. `ruff check .` passes.
-3. `@permanet ping` still returns `pong`.
+3. Mock `@permanet ping` still returns `pong`.
 4. Unsummoned public messages still return no response.
-5. Long responses are shortened or chunked.
-6. The bot does not automatically send multiple packets.
-7. `@permanet more` returns the next chunk only when a pending continuation exists.
-8. Repeated messages from the same node or channel can be rate-limited.
+5. A serial adapter can prove real mesh `@permanet ping -> pong` behavior.
+6. Live transmission is isolated behind adapter/config boundaries.
+7. Documentation explains hardware setup and rollback/disable steps.
 
-## After v0.2
+## After v0.3
 
-Once response safety exists, proceed to **v0.3.0: Meshtastic serial ping bot**.
-
-That milestone should connect a physical Meshtastic node and prove:
-
-```text
-@permanet ping -> pong
-```
-
-over live mesh hardware.
+Once the serial ping bot works safely, proceed to **v0.4.0: public summon mode hardening**.
