@@ -2,7 +2,24 @@
 
 This ledger records the current prioritized issue order for `permanet-mesh-agent`.
 
-It is intended to be readable by humans, Cursor, Codex, ChatGPT, and future AI reviewer agents. The ledger is not a replacement for GitHub Issues or GitHub Projects. It is a repo-owned planning artifact that explains why work is prioritized.
+It is intended to be readable by humans, Cursor, Codex, ChatGPT, and future AI reviewer agents. The ledger is not a replacement for GitHub Issues or GitHub Projects. GitHub Issues and Pull Requests remain the live source of truth for issue state, PR state, merge state, branch activity, labels, and assignees.
+
+## Source-of-truth rule
+
+Before starting work, humans and AI agents must verify live GitHub state instead of trusting this ledger alone.
+
+Check:
+
+```text
+1. Is the issue still open?
+2. Is there already an open PR for the issue?
+3. Is there already an active branch for the issue?
+4. Has main changed since this ledger was updated?
+5. Has a milestone PR recently merged that changes status docs?
+6. Are the labels, status, and acceptance criteria still current?
+```
+
+If this ledger conflicts with GitHub, GitHub wins and the ledger should be refreshed in a small docs-only PR.
 
 ## Scoring scale
 
@@ -88,46 +105,86 @@ Recommendation: Do Now / Strategic Build / Batch / Defer
 Rationale: 1–3 sentences
 ```
 
-## Current ranked issues
+## Current status snapshot
 
-This initial ranking was created after Issue #21 was opened and before the next implementation sprint. Scores should be updated as new information arrives.
+This ledger was refreshed after PR #39 merged the stale-agent-PR documentation cleanup.
+
+Known completed or superseded work should not be selected as active sprint work:
+
+```text
+#1  v0.2 response policy, cooldowns, and MORE pagination — completed by PR #35
+#7  GitHub issue templates — completed/superseded by #24 and PR #25
+#17 stale milestone wording cleanup — completed by PR #39
+#30 required-check wording cleanup — completed by PR #39
+#38 stale agent PR consolidation — completed by PR #39
+```
+
+The current implementation milestone is:
+
+```text
+v0.3.0 — Meshtastic serial ping bot
+```
+
+The project remains mock-first and not live-radio-ready until that milestone is implemented and verified.
+
+## Current ranked active issues
 
 | Rank | Issue | Title | Priority | Complexity | Category | Rationale |
 |---:|---:|---|---:|---:|---|---|
-| 1 | #5 | Enable main branch protection and required CI checks | 5 | 2 | Do Now | Turns documented quality rules into enforced GitHub behavior before more runtime work. |
-| 2 | #17 | Clean up stale milestone wording in README and CONTRIBUTING | 3 | 1 | Batch / Delegate | Quick cleanup that prevents humans and agents from following outdated Issue #2 sequencing. |
-| 3 | #7 | Add GitHub issue templates | 4 | 2 | Do Now | Improves every future issue by collecting scope, risk, tests, and rollback data up front. |
-| 4 | #12 | Split CI into separate test, lint, branch policy, and format checks | 4 | 3 | Strategic Build | Makes branch protection and future quality gates more precise. |
-| 5 | #9 | Enable and document secret scanning and push protection | 5 | 2 | Do Now | Reduces risk of leaking API keys, PSKs, node IDs, and private data before hardware/API work. |
-| 6 | #13 | Add SECURITY.md and vulnerability reporting policy | 4 | 2 | Do Now | Provides a clear path for reporting secret leaks, public mesh spam, and security issues. |
-| 7 | #8 | Add Dependabot configuration | 3 | 2 | Batch / Delegate | Improves dependency hygiene with low implementation complexity. |
-| 8 | #18 | Add project risk register | 4 | 2 | Do Now | Captures safety, AI, hardware, and operational risks before live Meshtastic work. |
-| 9 | #21 | Add agent-prioritized Eisenhower scoring system | 4 | 2 | Do Now | Creates the triage system that keeps the growing backlog orderly and agent-readable. |
-| 10 | #19 | Add typed config loader and validation | 4 | 3 | Strategic Build | Converts safe config expectations into validated behavior before real adapters depend on config. |
-| 11 | #1 | v0.2 response policy, rate limits, and MORE pagination | 5 | 4 | Strategic Build | Core runtime safety milestone; should proceed after the most important quality gates are in place. |
-| 12 | #6 | Add recursive AI reviewer workflow | 4 | 3 | Strategic Build | Establishes recursive self-reflection for future PRs, but works best after issue templates and CI are stronger. |
-| 13 | #10 | Enable CodeQL code scanning | 3 | 2 | Batch / Delegate | Adds security scanning with low runtime risk. |
-| 14 | #11 | Add CODEOWNERS | 3 | 2 | Batch / Delegate | Helps route review once collaborator ownership is clearer. |
-| 15 | #14 | Add CHANGELOG and release tagging workflow | 3 | 2 | Batch / Delegate | Improves release traceability before more milestones are completed. |
-| 16 | #15 | Create GitHub milestones and project board | 3 | 3 | Defer / Wishlist | Useful for roadmap clarity, but not as urgent as enforcement, safety, and CI. |
-| 17 | #16 | Define repository label taxonomy | 3 | 2 | Batch / Delegate | Useful for triage and search, especially after issue templates exist. |
-| 18 | #20 | Add structured logging | 4 | 3 | Strategic Build | Important before field testing, but should follow config, policy, and risk-register work. |
-| 19 | #4 | Feature wishlist backlog | 2 | 1 | Batch / Delegate | Living backlog; maintain continuously rather than completing as a sprint. |
+| 1 | #40 | Add multi-agent concurrency protocol for coordinated Codex and AI-assisted development | 5 | 2 | Do Now | Directly addresses the duplicate/stale PR failure mode from the recent multi-agent run and should be in place before running many agents again. |
+| 2 | #18 | Add project risk register for mesh safety and AI-assisted development | 5 | 2 | Do Now | Captures live-radio, public-mesh, secret, AI, and operational risks before v0.3 hardware work. |
+| 3 | #13 | Add SECURITY.md and vulnerability reporting policy | 4 | 2 | Do Now | Establishes responsible disclosure and security expectations before secrets, PSKs, hardware, or AI provider keys become more relevant. |
+| 4 | #9 | Enable and document secret scanning and push protection | 5 | 3 | Strategic Build | High safety value, but may require GitHub settings verification in addition to docs, so it should be coordinated carefully. |
+| 5 | #8 | Add Dependabot configuration for Python dependencies and GitHub Actions | 3 | 2 | Batch / Delegate | Low-risk dependency hygiene improvement that can run safely in parallel if file ownership is clear. |
+| 6 | #11 | Add CODEOWNERS for review ownership and high-risk areas | 3 | 2 | Batch / Delegate | Helps review routing and supports future coordinated-agent work once ownership expectations are agreed. |
+| 7 | #19 | Add typed config loader and validation for safe defaults | 4 | 3 | Strategic Build | Turns documented safe defaults into validated runtime behavior before live adapters depend on config. |
+| 8 | #37 | Refactor repository workflows and docs from Cursor-centric to Codex-optimized performance and quality model | 4 | 3 | Strategic Build | Useful after #40, because the concurrency protocol should define the coordination baseline for broader Codex workflow refactoring. |
+| 9 | #12 | Split CI into separate test, lint, branch policy, and format checks | 4 | 3 | Strategic Build | Improves check clarity, but changes required-check names and branch-policy behavior, so it should follow the concurrency SOP and docs consistency rules. |
+| 10 | #20 | Add structured logging for command routing and mesh safety events | 4 | 3 | Strategic Build | Important before field testing, but should follow risk/config work so logging avoids sensitive data and has clear safety requirements. |
+| 11 | #10 | Enable CodeQL code scanning for Python security and quality checks | 3 | 2 | Batch / Delegate | Adds security scanning with low runtime risk after the security workflow is clarified. |
+| 12 | #14 | Add CHANGELOG and release tagging workflow | 3 | 2 | Batch / Delegate | Improves milestone traceability before more releases are tagged. |
+| 13 | #16 | Define repository label taxonomy for type, area, risk, and status | 3 | 2 | Batch / Delegate | Useful for triage and project hygiene, especially after the concurrency SOP formalizes agent roles. |
+| 14 | #15 | Create GitHub milestones and project board for roadmap tracking | 3 | 3 | Defer / Wishlist | Valuable, but not as urgent as safety, security, config, and concurrency controls. |
+| 15 | #36 | Add progress-report infographic generator from YAML project state | 3 | 3 | Defer / Wishlist | Helpful deterministic reporting artifact, but less urgent than safety/process foundations and v0.3 readiness. |
+| 16 | #4 | Feature wishlist backlog | 2 | 1 | Batch / Delegate | Living idea bank; maintain continuously rather than completing as a single sprint. |
 
 ## Current recommended sprint order
 
 ```text
-#5  Branch protection / required CI
-#17 Stale docs cleanup
-#7  Issue templates
-#12 Split CI checks
-#9  Secret scanning and push protection
-#13 SECURITY.md
-#8  Dependabot
+#40 Multi-agent concurrency SOP
 #18 Risk register
+#13 SECURITY.md
+#9  Secret scanning and push protection
+#8  Dependabot
+#11 CODEOWNERS
 #19 Typed config validation
-#1  v0.2 response policy, rate limits, and MORE
+v0.3 Meshtastic serial ping bot
+#37 Codex workflow refactor
 ```
+
+## Parallelization guidance
+
+Safe concurrent work requires explicit coordination.
+
+Safer parallel examples:
+
+```text
+Worker A -> #13 SECURITY.md only
+Worker B -> #8 .github/dependabot.yml only
+Worker C -> #18 docs/risk-register.md only
+Reviewer -> review all PRs for branch freshness, duplicate issue work, and validation evidence
+```
+
+Risky parallel examples:
+
+```text
+Worker A -> AGENTS.md
+Worker B -> CONTRIBUTING.md
+Worker C -> docs/sops/pull-request-quality-gate.md
+Worker D -> docs/roadmap.md
+```
+
+Shared status, workflow, and milestone docs should usually be changed in one coordinated PR.
 
 ## Reprioritization triggers
 
@@ -140,6 +197,7 @@ Re-score issues when:
 - the AI Reviewer identifies a repeated process weakness
 - an issue expands in scope or complexity
 - a dependency becomes required by another issue
+- a PR merges that completes, supersedes, or changes the scope of a ranked issue
 
 ## AI Reviewer feedback loop
 
@@ -148,8 +206,8 @@ AI Reviewer reports may propose changes to this ledger when they identify repeat
 Example:
 
 ```text
-Observation: PRs keep changing docs without updating related SOPs.
-Recommendation: Increase priority for issue-template and AI-reviewer workflow tasks.
+Observation: Multiple agents opened duplicate or stale PRs for the same issues.
+Recommendation: Increase priority for #40 and require live issue/PR/branch preflight before edits.
 ```
 
 Human maintainers retain final priority authority.
