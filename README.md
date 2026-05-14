@@ -12,13 +12,19 @@ If you are reviewing this repository for the first time, read these in order:
 2. [`AGENTS.md`](AGENTS.md) — safety rules for human and AI-assisted development.
 3. [`docs/architecture.md`](docs/architecture.md) — module boundaries and data flow.
 4. [`docs/channel-policy.md`](docs/channel-policy.md) — public, private, and admin channel behavior.
-5. [Issue #1](https://github.com/Aggredicus/permanet-mesh-agent/issues/1) — v0.2.0 planning checklist.
+5. [`docs/roadmap.md`](docs/roadmap.md) — completed milestones and next implementation target.
 
 ## Current milestone
 
-**v0.1.0 target:** build and test a mock-radio command bot before connecting to physical Meshtastic hardware.
+**v0.2.0 complete:** the repository now has mock-first command routing, response policy, explicit `MORE` pagination, cooldowns, tests, docs, and CI smoke checks.
 
-The first hardware milestone is simple:
+The project remains mock-first and is **not** live-radio-ready yet. The next implementation milestone is:
+
+```text
+v0.3.0 — Meshtastic serial ping bot
+```
+
+The first live-hardware milestone is simple:
 
 ```text
 @permanet ping
@@ -35,9 +41,10 @@ pong
 1. Never auto-reply to all public mesh messages.
 2. Public channels are summon-only.
 3. Keep responses short enough for mesh use.
-4. Private group behavior must be explicitly configured.
-5. Admin commands require an allowlisted node identity.
-6. Hardware-facing code must be isolated behind radio adapters.
+4. Long responses continue only through explicit `MORE` requests.
+5. Private group behavior must be explicitly configured.
+6. Admin commands require an allowlisted node identity.
+7. Hardware-facing code must be isolated behind radio adapters.
 
 ## MVP command set
 
@@ -60,7 +67,7 @@ radio adapter
 message parser -> router -> policy layer -> command handler / AI backend
         |
         v
-response compressor
+response compressor / pagination cache
         |
         v
 outgoing mesh message
@@ -98,33 +105,39 @@ pip install -e .[dev]
 pytest
 ruff check .
 python -m permanet_agent.main --mock --message "@permanet ping"
+python -m permanet_agent.main --mock --message "hello mesh"
 ```
 
-Expected output:
+Expected smoke behavior:
 
 ```text
-pong
+@permanet ping -> pong
+hello mesh -> no output
 ```
 
 ## Current status
 
-This repository is intentionally scaffolded around a mock-first workflow. The mock adapter lets development proceed before all physical Meshtastic devices are available.
+This repository is intentionally mock-first. The mock adapter lets development proceed safely before physical Meshtastic devices are connected.
 
 Implemented:
 
 - mock radio adapter
 - command parser
-- basic router
+- summon-only router
 - mock AI backend
-- `help`, `ping`, `ask`, and placeholder `more` commands
-- tests for summon-only public behavior
+- `help`, `ping`, `ask`, and `more` commands
+- response policy for mesh-safe chunking
+- in-memory `MORE` pagination cache
+- basic per-node and per-channel cooldown guard
+- tests for summon-only behavior, response policy, pagination, and cooldowns
+- CLI smoke checks for `@permanet ping` and unsummoned public chatter
 - architecture, channel policy, hardware, roadmap, and handoff docs
 - GitHub Actions CI
 
 Next milestone:
 
 ```text
-v0.2.0 — response policy, rate limits, and MORE pagination
+v0.3.0 — Meshtastic serial ping bot
 ```
 
 ## Contributing
