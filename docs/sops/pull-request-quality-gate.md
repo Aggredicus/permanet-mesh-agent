@@ -61,10 +61,10 @@ If a command cannot be run, state why and do not imply it passed.
 
 Pull requests into `main` should require GitHub Actions CI to pass before merge.
 
-Current required check target:
+Verified required check target:
 
 ```text
-CI / test
+test
 ```
 
 If GitHub exposes a slightly different required-check name, use the closest equivalent and document the exact name in the PR or linked issue.

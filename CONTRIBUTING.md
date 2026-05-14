@@ -27,7 +27,7 @@ The intended GitHub protection for `main` is:
 
 ```text
 Pull requests required before merge
-CI / test required before merge
+test required before merge
 Force pushes blocked
 Branch deletion blocked
 Conversation resolution required if available

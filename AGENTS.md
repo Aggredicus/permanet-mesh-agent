@@ -49,7 +49,7 @@ Agents should assume these expectations apply even if GitHub settings are still 
 
 ```text
 Pull requests are required before merge.
-CI / test must pass before merge.
+test must pass before merge.
 Force pushes to main are not allowed.
 Deleting main is not allowed.
 Conversation resolution is required if available.
