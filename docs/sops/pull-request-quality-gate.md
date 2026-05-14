@@ -61,13 +61,13 @@ If a command cannot be run, state why and do not imply it passed.
 
 Pull requests into `main` should require GitHub Actions CI to pass before merge.
 
-Current required check target:
+Verified required check target:
 
 ```text
-CI / test
+test
 ```
 
-If GitHub exposes a slightly different required-check name, use the closest equivalent and document the exact name in the PR or linked issue.
+The verification history for this required check is documented in `docs/sops/required-status-check.md`. If the CI workflow is later split into separate jobs, update that note, this SOP, and the GitHub ruleset together.
 
 Do not merge PRs into `main` when required checks are failing, pending, skipped unexpectedly, or missing.
 
