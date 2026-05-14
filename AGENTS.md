@@ -49,7 +49,7 @@ Agents should assume these expectations apply even if GitHub settings are still 
 
 ```text
 Pull requests are required before merge.
-CI / test must pass before merge.
+test must pass before merge.
 Force pushes to main are not allowed.
 Deleting main is not allowed.
 Conversation resolution is required if available.
@@ -117,13 +117,19 @@ Stop and ask for human review before:
 - Use examples and `.env.example` for configuration templates.
 - Keep implementation scoped to the linked issue.
 
-## MVP target
+## Current milestone
 
-The first success condition is:
+The project has completed the mock-first v0.2 response-safety milestone. The next implementation milestone is:
+
+```text
+v0.3.0 — Meshtastic serial ping bot
+```
+
+The first live-hardware success condition is:
 
 ```text
 Input:  @permanet ping
 Output: pong
 ```
 
-The first milestone must work with mock radio before live hardware.
+This must continue to work with mock radio before and after live hardware support is added.
