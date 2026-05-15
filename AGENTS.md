@@ -21,6 +21,7 @@ All human and AI-assisted implementation work should follow:
 - `docs/sops/pull-request-quality-gate.md`
 - `docs/sops/issue-prioritization.md`
 - `docs/sops/multi-agent-concurrency.md`
+- `docs/sops/governance-invariants.md`
 
 Cursor-specific behavior is defined in:
 
@@ -43,6 +44,7 @@ Rules:
 - PR summaries must include validation evidence and a rollback plan.
 - Use the priority ledger and prioritization SOP when selecting or reordering work.
 - Use the multi-agent concurrency SOP before coordinated AI-agent work.
+- Use the governance invariant roadmap when work affects contributor process, records, social governance, deployment claims, or project ethos.
 - Treat required GitHub checks as merge-blocking once branch protection is active.
 
 ## Protected main expectations
@@ -73,6 +75,7 @@ Agents must not bypass, weaken, or claim completion of branch protection setting
 8. Priority/complexity scoring before large backlog reordering.
 9. Coordinated multi-agent work before parallel execution.
 10. Repo-native assignment metadata before agents edit assigned work.
+11. Governance invariants backed by mechanisms, records, feedback loops, and safeguards.
 
 ## Repository map
 
@@ -113,6 +116,7 @@ Stop and ask for human review before:
 - Claiming validation success without command output or explicit evidence.
 - Reordering high-priority safety work without updating the priority ledger rationale.
 - Starting parallel agent work without checking active issues, PRs, branches, file ownership, and assignment metadata.
+- Making ecological, community-benefit, or real-world deployment claims without records or evidence.
 - Merging while required GitHub checks are failing, pending, or missing.
 - Claiming branch protection is enabled without verified GitHub settings evidence.
 
