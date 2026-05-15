@@ -12,12 +12,6 @@ This SOP covers process and documentation workflow for Codex, Cursor, ChatGPT, a
 
 It does not change runtime bot behavior.
 
-For GitHub Project Board setup and operational use, also read:
-
-```text
-docs/sops/github-project-orchestration.md
-```
-
 ## Core rule
 
 Use coordinated concurrency, not independent concurrency.
@@ -48,7 +42,7 @@ Live GitHub state is the source of truth for:
 
 Repository planning files such as `docs/planning/priority-ledger.md` are advisory and may lag behind recent merges. If a planning file conflicts with GitHub, GitHub wins and the planning file should be refreshed in a small docs-only PR.
 
-When the GitHub Project Board exists, it is the coordination dashboard but not the factual source of truth. Issues, pull requests, commits, and CI remain factual truth.
+A GitHub Project Board may be used later as an optional coordination aid if it is actively maintained, but it is not required for normal work. Issues, PRs, branches, docs, templates, scripts, and CI are the canonical workflow surfaces for this repository.
 
 ## Coordinator Agent
 
@@ -61,7 +55,7 @@ Responsibilities:
 - inspect open issues
 - inspect open PRs
 - inspect active branches
-- inspect GitHub Project Board assignments when available
+- inspect assignment metadata in issue bodies, issue comments, PR bodies, or `docs/templates/agent-assignment-table.md`
 - detect duplicate or stale work
 - assign one issue per worker
 - define allowed files per worker
@@ -90,7 +84,7 @@ Responsibilities:
 - verify the assigned issue is still open
 - verify no open PR already targets the same issue
 - verify no active branch already targets the same issue
-- verify GitHub Project Board assignment when available
+- verify assignment metadata when available
 - create or use an issue-linked branch
 - edit only assigned files
 - keep the patch small and reviewable
@@ -120,7 +114,7 @@ Responsibilities:
 - check whether the branch is current with `main`
 - check whether another PR already solves the same issue
 - check file ownership conflicts
-- check Project Board state when available
+- check assignment metadata when available
 - check validation evidence
 - check safety claims
 - check docs consistency when workflow, status, milestone, or check names change
@@ -143,7 +137,7 @@ Every agent must complete this before editing files:
 8. What validation proves success?
 9. Could this conflict with another active PR?
 10. Should this be one consolidated PR instead of parallel work?
-11. If the Project Board exists, does the board assignment agree?
+11. Does the assignment metadata agree with the planned work?
 ```
 
 If any answer is unclear, stop and ask for maintainer guidance.
@@ -320,7 +314,6 @@ docs/sops/ai-coding-quality-system.md
 docs/sops/branching-and-release.md
 docs/sops/pull-request-quality-gate.md
 docs/sops/multi-agent-concurrency.md
-docs/sops/github-project-orchestration.md
 ```
 
 ### Runtime safety behavior changes
