@@ -20,6 +20,7 @@ All human and AI-assisted implementation work should follow:
 - `docs/sops/ai-coding-quality-system.md`
 - `docs/sops/pull-request-quality-gate.md`
 - `docs/sops/issue-prioritization.md`
+- `docs/sops/multi-agent-concurrency.md`
 
 Cursor-specific behavior is defined in:
 
@@ -30,6 +31,8 @@ Planning and prioritization are tracked in:
 
 - `docs/planning/priority-ledger.md`
 
+Active coordination should remain repo-native and app-functional. Use issues, pull requests, branches, PR template fields, issue comments, assignment tables, local scripts, and CI as the canonical workflow surfaces. A GitHub Project Board may be used later as an optional aid if it is actively maintained, but it is not required for normal work.
+
 Rules:
 
 - Do not implement feature work directly on `main`.
@@ -39,6 +42,7 @@ Rules:
 - Stop before high-risk behavior changes.
 - PR summaries must include validation evidence and a rollback plan.
 - Use the priority ledger and prioritization SOP when selecting or reordering work.
+- Use the multi-agent concurrency SOP before coordinated AI-agent work.
 - Treat required GitHub checks as merge-blocking once branch protection is active.
 
 ## Protected main expectations
@@ -67,6 +71,8 @@ Agents must not bypass, weaken, or claim completion of branch protection setting
 6. Short, radio-safe responses by default.
 7. Issue-first, branch-first, evidence-backed changes.
 8. Priority/complexity scoring before large backlog reordering.
+9. Coordinated multi-agent work before parallel execution.
+10. Repo-native assignment metadata before agents edit assigned work.
 
 ## Repository map
 
@@ -80,6 +86,7 @@ tests/                         quality gates for command and routing behavior
 docs/                          project, architecture, hardware, and deployment notes
 docs/sops/                     engineering quality SOPs
 docs/planning/                 roadmap and priority planning artifacts
+docs/templates/                reusable coordination and planning templates
 .cursor/rules/                 Cursor-specific development rules
 ```
 
@@ -105,6 +112,7 @@ Stop and ask for human review before:
 - Working directly on `main` for feature or governance work.
 - Claiming validation success without command output or explicit evidence.
 - Reordering high-priority safety work without updating the priority ledger rationale.
+- Starting parallel agent work without checking active issues, PRs, branches, file ownership, and assignment metadata.
 - Merging while required GitHub checks are failing, pending, or missing.
 - Claiming branch protection is enabled without verified GitHub settings evidence.
 
