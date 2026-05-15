@@ -12,8 +12,6 @@ This script is intentionally lightweight.
 It warns aggressively before adding hard enforcement.
 """
 
-from __future__ import annotations
-
 import re
 import subprocess
 import sys
@@ -52,9 +50,15 @@ def branch_name_valid(branch: str) -> bool:
     return any(re.match(pattern, branch) for pattern in ALLOWED_BRANCH_PATTERNS)
 
 
-def changed_files() -> list[str]:
-    output = run_git("diff", "--name-only", "origin/main...")
-    return [line.strip() for line in output.splitlines() if line.strip()]
+def changed_files() -> tuple[list[str], bool]:
+    try:
+        output = run_git("diff", "--name-only", "origin/main...")
+    except subprocess.CalledProcessError:
+        print("WARNING: Could not compare changed files against origin/main.")
+        print("Fetch origin/main or run from a full clone for shared-file detection.")
+        return [], False
+
+    return [line.strip() for line in output.splitlines() if line.strip()], True
 
 
 def main() -> int:
@@ -67,12 +71,12 @@ def main() -> int:
         print("WARNING: Branch name does not match approved patterns.")
         print("See docs/sops/branching-and-release.md")
 
-    files = changed_files()
+    files, diff_available = changed_files()
 
-    if not files:
+    if diff_available and not files:
         print("WARNING: No changed files detected relative to origin/main")
 
-    shared = [f for f in files if f in SHARED_TRUTH_FILES]
+    shared = [file for file in files if file in SHARED_TRUTH_FILES]
 
     if shared:
         print("WARNING: Shared truth files modified:")
