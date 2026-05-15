@@ -36,7 +36,7 @@ Conversation resolution required if available
 Administrator enforcement enabled if practical
 ```
 
-If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. GitHub should enforce these rules directly once Issue #5 is resolved.
+If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. GitHub branch protection settings should be kept in sync with this workflow as the repository evolves.
 
 ## Issue forms
 
