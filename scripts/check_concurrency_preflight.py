@@ -16,7 +16,6 @@ import re
 import subprocess
 import sys
 
-
 ALLOWED_BRANCH_PATTERNS = [
     r"^feature/\d+-[a-z0-9-]+$",
     r"^fix/\d+-[a-z0-9-]+$",
