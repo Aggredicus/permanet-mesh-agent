@@ -6,6 +6,8 @@ Every pull request should make a proposed change reviewable, testable, reversibl
 
 The PR quality gate protects the project from undocumented assumptions, unsafe behavior changes, accidental public mesh spam, and unverified AI-generated code.
 
+Use this quality gate together with `docs/sops/code-review-process.md`.
+
 ## Required PR fields
 
 Each PR should include:
@@ -17,6 +19,7 @@ Each PR should include:
 - risk level
 - safety checklist
 - validation evidence
+- standardized code review notes
 - documentation updates
 - known limitations
 - rollback plan
@@ -56,6 +59,26 @@ hello mesh -> no output
 ```
 
 If a command cannot be run, state why and do not imply it passed.
+
+## Standardized code review
+
+Before maintainer review, contributors should either generate a review packet or explain why it was not generated.
+
+Default command:
+
+```bash
+python scripts/generate_review_packet.py
+```
+
+Default output:
+
+```text
+.review/review-packet.md
+```
+
+The PR body should record whether issue alignment, changed files, validation evidence, project invariants, docs/config consistency, follow-up work, and final recommendation were reviewed.
+
+Agents may prepare review evidence and recommend readiness, but human maintainers retain final merge authority.
 
 ## Required GitHub checks
 
@@ -107,6 +130,7 @@ Do not merge if:
 - tests are failing
 - required GitHub checks are failing or missing
 - validation evidence is missing
+- the standardized review section is missing or unexplained
 - the PR changes public mesh behavior without explicit review
 - the PR enables live radio behavior by default
 - secrets or private identifiers are present
