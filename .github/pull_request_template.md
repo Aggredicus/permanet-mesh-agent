@@ -45,12 +45,31 @@ Coordinator/reviewer notes:
 ## Validation evidence
 
 - [ ] `python scripts/check_branch_policy.py`
+- [ ] `python scripts/check_concurrency_preflight.py`
+- [ ] `python scripts/generate_review_packet.py`
 - [ ] `pytest`
 - [ ] `ruff check .`
 - [ ] `python -m permanet_agent.main --mock --message "@permanet ping"`
 - [ ] `python -m permanet_agent.main --mock --message "hello mesh"`
 
 If a validation step was not run, explain why without implying it passed.
+
+## Standardized code review
+
+- [ ] Review packet generated or intentionally skipped with explanation.
+- [ ] Issue alignment reviewed.
+- [ ] Changed files reviewed.
+- [ ] Validation evidence reviewed.
+- [ ] Project invariants reviewed.
+- [ ] Docs/config consistency reviewed.
+- [ ] Follow-up issues listed if needed.
+- [ ] Final recommendation recorded.
+
+Review packet path or notes:
+
+```text
+
+```
 
 ## Documentation updated
 
