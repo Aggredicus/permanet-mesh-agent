@@ -14,12 +14,31 @@ Read these SOPs before meaningful implementation work:
 - `docs/sops/ai-coding-quality-system.md`
 - `docs/sops/pull-request-quality-gate.md`
 - `docs/sops/issue-prioritization.md`
+- `docs/sops/multi-agent-concurrency.md`
+- `docs/sops/governance-invariants.md`
 
 Use this planning artifact when selecting or reordering work:
 
 - `docs/planning/priority-ledger.md`
 
 Check current GitHub issue state before starting work, because the priority ledger can lag behind recently merged PRs.
+
+## Governance invariant roadmap
+
+PermaNet uses a governance invariant roadmap to keep project values tied to concrete mechanisms, records, feedback loops, and safeguards.
+
+Use `docs/sops/governance-invariants.md` when work affects:
+
+- contributor process,
+- open records,
+- conflict repair,
+- non-extractive collaboration expectations,
+- skill transmission,
+- real-world benefit claims,
+- place-based field deployment practices,
+- ecological or community impact claims.
+
+The roadmap is documentation/process guidance. It does not change runtime bot behavior or enable live radio behavior.
 
 ## Protected main workflow
 
@@ -36,7 +55,7 @@ Conversation resolution required if available
 Administrator enforcement enabled if practical
 ```
 
-If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. GitHub should enforce these rules directly once Issue #5 is resolved.
+If branch protection is not yet active in GitHub settings, contributors should still follow this workflow manually. GitHub branch protection settings should be kept in sync with this workflow as the repository evolves.
 
 ## Issue forms
 
@@ -114,6 +133,7 @@ Do not implement feature work directly on `main`.
 ```bash
 pip install -e .[dev]
 python scripts/check_branch_policy.py
+python scripts/check_concurrency_preflight.py
 pytest
 ruff check .
 python -m permanet_agent.main --mock --message "@permanet ping"
@@ -144,6 +164,8 @@ Do not add automatic multi-packet replies. Long answers should be shortened or c
 
 Do not hardcode private channel names, PSKs, node IDs, API keys, client names, or other sensitive information.
 
+Do not make ecological, community-benefit, or real-world deployment claims without records or evidence.
+
 ## Hardware rule
 
 All live radio behavior must be backed by mock-radio tests first.
@@ -154,6 +176,7 @@ Before adding a Meshtastic serial, TCP, BLE, or meshtasticd adapter, prove the s
 
 - [ ] Linked issue is included.
 - [ ] `python scripts/check_branch_policy.py` passes on an issue-linked branch.
+- [ ] `python scripts/check_concurrency_preflight.py` has been run or intentionally skipped with explanation.
 - [ ] `pytest` passes.
 - [ ] `ruff check .` passes.
 - [ ] Public chatter without a summon is still ignored.

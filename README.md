@@ -18,7 +18,9 @@ If you are reviewing this repository for the first time, read these in order:
 
 **v0.2.0 complete:** the repository now has mock-first command routing, response policy, explicit `MORE` pagination, cooldowns, tests, docs, and CI smoke checks.
 
-The project remains mock-first and is **not** live-radio-ready yet. The next implementation milestone is:
+The project remains mock-first and is **not** live-radio-ready yet.
+
+The next implementation milestone under active planning is:
 
 ```text
 v0.3.0 — Meshtastic serial ping bot
